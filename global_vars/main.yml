@@ -1,0 +1,18 @@
+#local setings
+job_dir: /opt
+docker_user: docker_user
+
+# wordpress
+wp_version: 5.3.2
+wp_db_name: wordpress
+wp_db_tb_pre: wp_
+wp_db_host: mysql
+wp_db_password: my_password
+domain1: test1.com
+domain2: test2.com
+
+#bonus
+grafana_url: localhost:3000
+grafana_password: admin
+
+

@@ -1,0 +1,10 @@
+- name: NGINX + MySQL + WORDPRES + DOCKER
+  hosts: all
+  vars_files:
+    - global_vars/main.yml
+    
+  roles:
+    - docker
+    - nginx
+    - wordpress-compose
+    

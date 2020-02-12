@@ -1,0 +1,57 @@
+- name: setup compose dir structure
+  file:
+    path: "{{ job_dir }}/{{ item }}"
+    state: directory
+    recurse: yes
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: 0755
+  with_items:
+  - wordpress
+  - wp-db-data
+  - nginx
+  - logs/nginx
+  
+- name: deploy Docker Compose project for (Wordpress/MariaDB/Nginx containers)
+  template:
+    src: docker-compose.j2
+    dest: "{{ job_dir }}/docker-compose.yml"
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: 0644
+
+- name: deploy WordPress Nginx virtual host
+  template:
+    src: wordpress-nginx.j2
+    dest: "{{ job_dir }}/nginx/wordpress.conf"
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: 0644
+
+- name: Run docker-compose up
+  command: docker-compose -f docker-compose.yml up -d
+  args:
+    chdir: "{{ job_dir }}"
+
+- name: giving some time for project (all 3 containers) to start-up
+  pause:
+    seconds: 10
+
+- debug:
+    msg:
+      - "With specified variables, following configuration has been made:"
+      - ""
+      - "URL used for Nginx virtual host: {{ domain }}"
+      - "WordPress Docker image version:{{ wp_version }}-php7.0-fpm"
+      - "WORDPRESS_DB_NAME: {{ wp_db_name }}"
+      - "WORDPRESS_TABLE_PREFIX: {{ wp_db_tb_pre }}"
+      - "WORDPRESS_DB_HOST: {{ wp_db_host }}"
+      - "WORDPRESS_DB_PASSWORD: {{ wp_db_psw }}"
+      - "MYSQL_ROOT_PASSWORD: {{ wp_db_psw }}"
+
+- debug:
+    msg:
+      - "Setup successfully complete."
+      - ""
+      - "Wordpress instance is available on following IP: {{ inventory_hostname }}"
+      - "If DNS is pointing to this IP, it'll be available on: {{ domain }}"
