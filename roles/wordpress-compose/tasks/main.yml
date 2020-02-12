@@ -22,7 +22,7 @@
 
 - name: deploy WordPress Nginx virtual host
   template:
-    src: wordpress-nginx.j2
+    src: nginx1.j2
     dest: "{{ job_dir }}/nginx/wordpress.conf"
     owner: "{{ docker_user }}"
     group: "{{ docker_user }}"
@@ -42,7 +42,7 @@
       - "With specified variables, following configuration has been made:"
       - ""
       - "URL used for Nginx virtual host: {{ domain }}"
-      - "WordPress Docker image version:{{ wp_version }}-php7.0-fpm"
+      - "WordPress Docker image version:{{ wp_version }}-php7.2-fpm"
       - "WORDPRESS_DB_NAME: {{ wp_db_name }}"
       - "WORDPRESS_TABLE_PREFIX: {{ wp_db_tb_pre }}"
       - "WORDPRESS_DB_HOST: {{ wp_db_host }}"

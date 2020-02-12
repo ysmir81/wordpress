@@ -1,10 +1,13 @@
 - name: NGINX + MySQL + WORDPRES + DOCKER
   hosts: all
+  #become: true
+  #become_method: su
+  #become_user: root
   vars_files:
     - global_vars/main.yml
     
   roles:
     - docker
-    - nginx
+   # - nginx
     - wordpress-compose
     
