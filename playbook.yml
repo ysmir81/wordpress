@@ -5,9 +5,9 @@
   #become_user: root
   vars_files:
     - global_vars/main.yml
-    
+
   roles:
     - docker
    # - nginx
     - wordpress-compose
-    
+

@@ -1,6 +1,6 @@
 - name: Add repository
   get_url:
-    url: https://download.docker.com/linux/centos/docker-ce.repo 
+    url: https://download.docker.com/linux/centos/docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
 
 - name: Install DOCKER and etc
@@ -11,7 +11,7 @@
     - docker-ce
     - docker-ce-cli
     - containerd.io
-    
+
 - name: Download docker-compose
   get_url:
     url: https://github.com/docker/compose/releases/download/1.25.3/docker-compose-Linux-x86_64
@@ -22,7 +22,7 @@
   systemd:
     name: docker
     enabled: yes
-    
+
 - name: Systemd daemon-reload
   systemd:
     daemon_reload: yes
@@ -31,7 +31,7 @@
   user:
     name: "{{ docker_user }}"
     groups: docker
-    append: yes    
+    append: yes
 
 - name: DOCKER start
   systemd:

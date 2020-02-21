@@ -11,7 +11,7 @@
   - wp-db-data
   - nginx
   - logs/nginx
-  
+ 
 - name: deploy Docker Compose project for (Wordpress/MariaDB/Nginx containers)
   template:
     src: docker-compose.j2
