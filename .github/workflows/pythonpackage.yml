@@ -13,4 +13,4 @@ jobs:
 
     - name: Lint Ansible Playbook
       # replace "master" with any valid ref
-      uses: ansible/ansible-lint-action@master
+      uses: ansible/ansible-lint-action@4.1.0
